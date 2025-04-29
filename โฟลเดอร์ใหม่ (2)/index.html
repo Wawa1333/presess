@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ระบบยืนยันสิทธิ์</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    body {
+      text-align: center;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #ffffff, #ffffff);
+      margin: 0;
+      padding: 0;
+    }
+
+    .section {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      display: none;
+      padding: 40px 20px;
+    }
+
+    .section.show {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .btn {
+      font-size: 20px;
+      padding: 12px 30px;
+      margin: 15px;
+      border: none;
+      cursor: pointer;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: background 0.3s;
+    }
+
+    .confirm {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .cancel {
+      background-color: #f44336;
+      color: white;
+    }
+
+    .back {
+      background-color: #607d8b;
+      color: white;
+    }
+
+    .icon {
+      font-size: 60px;
+      margin-bottom: 10px;
+    }
+
+    h1, h2 {
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 18px;
+      color: #444;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- เสียงสำหรับปุ่มยืนยัน -->
+  <audio id="confirmSound" src="click.mp3" preload="auto"></audio>
+
+  <!-- หน้าหลัก -->
+  <div id="mainPage" class="section show">
+    <img src="IMG1.jpg" alt="หัวเว็บ" width="600"><br><br>
+    <h1>🎓 ยินดีต้อนรับสู่ระบบยืนยันสิทธิ์</h1>
+    <p>กรุณาเลือกดำเนินการ</p>
+    <button class="btn confirm" onclick="goToNextPage()">✅ ยืนยันสิทธิ์</button>
+    <button class="btn cancel" onclick="confirmChoice('no')">❌ สละสิทธิ์</button>
+  </div>
+
+  <!-- หน้ายืนยัน -->
+  <div id="nextPage" class="section">
+    <div class="icon">🎉</div>
+    <h1 style="color: green;">You are invited!</h1>
+    
+    <!-- รูปภาพแสดงความยินดี -->
+    <div class="image-container">
+      <img src="congratulations.png" alt="Congratulations Image" class="center-image">
+    </div>
+
+    <button onclick="goBack()" class="btn back">🔙 กลับหน้าหลัก</button>
+  </div>
+
+  <!-- หน้าสละสิทธิ์ -->
+  <div id="cancelMessage" class="section">
+    <div class="icon">❌</div>
+    <h2 style="color: red;">คุณได้สละสิทธิ์แล้ว</h2>
+    <p>หากต้องการกลับ กรุณากดปุ่มด้านล่าง</p>
+    <button onclick="goBack()" class="btn back">🔙 กลับหน้าหลัก</button>
+  </div>
+
+  <script>
+    function showSection(idToShow) {
+      const sections = ['mainPage', 'nextPage', 'cancelMessage'];
+      sections.forEach(id => {
+        const el = document.getElementById(id);
+        if (id === idToShow) {
+          el.style.display = 'block';
+          setTimeout(() => {
+            el.classList.add('show');
+          }, 10);
+        } else {
+          el.classList.remove('show');
+          setTimeout(() => {
+            el.style.display = 'none';
+          }, 600);
+        }
+      });
+    }
+
+    function goToNextPage() {
+      document.getElementById("confirmSound").play();
+      showSection('nextPage');
+    }
+
+    function confirmChoice(choice) {
+      if (choice === 'no') {
+        // ถ้ามีเสียง cancelSound ในภายหลัง ค่อยเพิ่มก็ได้
+        showSection('cancelMessage');
+      }
+    }
+
+    function goBack() {
+      // แก้ไขตรงนี้: ลบเสียงที่ไม่มีอยู่จริงออก
+      showSection('mainPage');
+    }
+  </script>
+
+</body>
+</html>

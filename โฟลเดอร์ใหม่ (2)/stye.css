@@ -1,0 +1,46 @@
+body {
+    background: #fffefe;  /* พื้นหลังสีเทาอ่อน */
+}
+
+.btn {
+    width: 90%;  /* ให้ปุ่มกินพื้นที่ 90% ของหน้าจอ */
+}
+
+@media (max-width: 600px) {
+    /* เมื่อหน้าจอเล็กกว่า 600px (มือถือ) */
+    img {
+        max-width: 100%;  /* ป้องกันรูปภาพล้นจอ */
+        height: auto;
+    }
+
+    .btn {
+        width: 90%;
+        font-size: 16px;  /* ปรับขนาดฟอนต์ของปุ่มให้เล็กลง */
+    }
+
+    .icon {
+        font-size: 40px;  /* ปรับขนาดไอคอนให้เล็กลง */
+    }
+
+    h1, h2 {
+        font-size: 22px;  /* หัวเรื่องเล็กลงบนมือถือ */
+    }
+
+    p {
+        font-size: 16px;  /* ตัวหนังสือธรรมดาเล็กลง */
+    }
+
+     .image-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+      }
+      
+      .center-image {
+        width: 300px; /* กำหนดความกว้างแบบชัดเจน */
+        max-width: 80%; /* ไม่ให้ล้นหน้าจอบนอุปกรณ์เล็ก */
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+}
